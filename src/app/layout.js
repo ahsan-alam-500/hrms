@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/images/logo.WebP";
+import logo from "../../public/images/logo.png";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +26,13 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Header  */}
-        <header className="px-4 bg-gray-800 py-4 sticky top-0">
+        <header className="px-4 bg-gray-800 py-2 sticky top-0">
           <div className="container mx-auto flex justify-between items-center">
             <Image
               src={logo}
               alt="Logo"
               width={200}
+              className="logo"
             />
             <nav>
               <ul className="flex space-x-4">
@@ -49,7 +50,7 @@ export default function RootLayout({ children }) {
         {children}
         {/* Footer */}
         <footer className="bg-gray-800 py-6 text-center text-sm text-gray-400">
-          &copy; {new Date().getFullYear()} HRMS Inc. All rights reserved.
+          &copy; {new Date().getFullYear()} Sardar IT Inc. All rights reserved.
         </footer>
       </body>
     </html>
