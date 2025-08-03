@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -8,8 +9,18 @@ export default function LoginPage() {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // TODO: Add real authentication logic
-        console.log({ email, password });
+        axios
+            .post("/api/login", { email, password })
+            .then((response) => {
+                if (response.status === 200) {
+                    const token = response.data.token;
+                    localStorage.setItem("token", token);
+                    alert("Login successful!");
+                }
+            })
+            .catch((error) => {
+                alert("Login failed. Please check your credentials.");
+            })
     };
 
     return (
