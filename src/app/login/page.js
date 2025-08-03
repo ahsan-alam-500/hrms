@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -9,11 +10,10 @@ export default function LoginPage() {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        axios
-            .post("/api/login", { email, password })
+        axios.post("http://localhost:8000/api/v1/login", { email, password })
             .then((response) => {
                 if (response.status === 200) {
-                    const token = response.data.token;
+                    const token = response.data.access_token;
                     localStorage.setItem("token", token);
                     alert("Login successful!");
                 }
@@ -22,6 +22,12 @@ export default function LoginPage() {
                 alert("Login failed. Please check your credentials.");
             })
     };
+
+    const router = useRouter();
+
+    if (typeof window !== "undefined" && localStorage.getItem("token")) {
+        router.push("/employee");
+    }
 
     return (
         <div className="min-h-[84vh] flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
