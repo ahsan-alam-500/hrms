@@ -27,13 +27,11 @@ export default function Page() {
             })
             .then((response) => {
                 const data = response.data;
-                const mapped = data.map((user) => ({
-                    id: user.id.toString(),
-                    name: user.name,
-                    designation: user.designation.includes("web")
-                        ? "Web Application Developer"
-                        : "Android Developer",
-                    image: "https://i.ibb.co/N2Bz0Jb8/image-14.png",
+                const mapped = data.map((emp) => ({
+                    id: emp.id.toString(),
+                    name: emp.name,
+                    designation: emp.designation || "Unknown",
+                    user: emp.user, // contains .image
                 }));
                 setEmployees(mapped);
                 setFilteredEmployees(mapped);
@@ -152,12 +150,13 @@ export default function Page() {
                                 className="bg-gray-800 p-6 rounded-md shadow-md flex flex-col items-center gap-4 text-center"
                             >
                                 <Image
-                                    src={emp.image ?? "https://i.ibb.co/N2Bz0Jb8/image-14.png"}
+                                    src={emp.user?.image ?? "https://i.ibb.co/N2Bz0Jb8/image-14.png"}
                                     alt={emp.name}
                                     width={100}
                                     height={100}
                                     className="rounded-full object-cover"
                                 />
+
                                 <h2 className="text-white text-2xl font-semibold">{emp.name}</h2>
                                 <p className="text-gray-400">{emp.designation}</p>
                                 <div className="flex space-x-4 text-white text-xl">

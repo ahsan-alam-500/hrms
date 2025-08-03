@@ -24,6 +24,12 @@ export default function Header() {
                         {isLoggedIn ? (
                             <>
                                 <li>
+                                    <Link href="/payrolls">Payroll</Link>
+                                </li>
+                                <li>
+                                    <Link href="/attendence">Attendence</Link>
+                                </li>
+                                <li>
                                     <Link href="/employee">Employee</Link>
                                 </li>
                                 <li>
